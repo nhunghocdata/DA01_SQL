@@ -35,7 +35,8 @@ output: % null / call category * 100
 input: call_category
 */
 --- khúc when nếu thêm 1 điều kiện nữa thì phải dùng or hoặc and mới kết thúc bằng then được
-select round(100* sum(case 
+--- 100 phải thêm .0 thì mới ra số thập phân ở kết quả
+select round(100.0 * sum(case 
   when call_category is null or call_category = 'n/a' then 1
   else 0 
 end)/count(*),1) as uncategorised_call_pct
