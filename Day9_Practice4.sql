@@ -34,12 +34,13 @@ round your answer to 1 decimal place
 output: % null / call category * 100
 input: call_category
 */
-select (select count(case 
-  when call_category is null then 1
-  when call_category = 'n/a' then 1
-end))/(select count(*) from callers)*100
+--- khúc when nếu thêm 1 điều kiện nữa thì phải dùng or hoặc and mới kết thúc bằng then được
+select round(100* sum(case 
+  when call_category is null or call_category = 'n/a' then 1
+  else 0 
+end)/count(*),1) as uncategorised_call_pct
 from callers
-
+  
 --- Ex4:
 select name from customer
 where not referee_id = 2 or referee_id is null;
