@@ -68,4 +68,20 @@ on a.reports_to = b.reports_to
 group by a.reports_to
 order by a.reports_to
 
+--- Ex6:
+select a.product_name, sum(b.unit) as total_unit
+from products as a
+left join orders as b
+on a.product_id = b.product_id
+where b.order_date between '2020-01-31' and '2020-03-01'
+group by a.product_name
+having sum(b.unit) >= 100
+
+--- Ex7:
+select a.page_id
+from pages as a
+left join page_likes as b 
+on a.page_id = b.page_id
+where b.page_id is null 
+
 
